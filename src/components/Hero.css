@@ -1,0 +1,200 @@
+.hero {
+  position: relative;
+  background: var(--espresso);
+  color: var(--cream);
+  padding-top: 132px;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+/* warm radial glow behind content */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      120% 90% at 78% 8%,
+      rgba(221, 107, 61, 0.22),
+      transparent 55%
+    ),
+    radial-gradient(80% 70% at 0% 100%, rgba(140, 154, 110, 0.14), transparent 60%);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+
+.hero__copy {
+  max-width: 40rem;
+}
+
+.hero__title {
+  font-size: clamp(2.9rem, 7.2vw, 5.6rem);
+  font-weight: 600;
+  margin-top: 1.5rem;
+  letter-spacing: -0.03em;
+}
+.hero__title-accent {
+  color: var(--ember);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.hero__lead {
+  font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+  color: var(--muted-dark);
+  margin-top: 1.6rem;
+  max-width: 46ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.2rem;
+}
+
+.hero__stats {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 3.2rem);
+  margin-top: 3.2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line-dark);
+}
+.hero__stats dt {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-dark);
+}
+.hero__stats dd {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 600;
+  margin-top: 0.3rem;
+  color: var(--cream);
+}
+
+/* media */
+.hero__media {
+  position: relative;
+}
+.hero__img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.6);
+}
+.hero__badge {
+  position: absolute;
+  left: -14px;
+  bottom: 26px;
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: 100px;
+  padding: 0.7rem 1.2rem 0.7rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.55);
+}
+.hero__badge strong {
+  font-family: var(--font-body);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.86rem;
+}
+.hero__badge-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ember);
+  box-shadow: 0 0 0 0 rgba(221, 107, 61, 0.6);
+  animation: pulse 2.4s var(--ease) infinite;
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(221, 107, 61, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 9px rgba(221, 107, 61, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(221, 107, 61, 0);
+  }
+}
+
+/* origin marquee strip */
+.hero__marquee {
+  position: relative;
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+  overflow: hidden;
+  padding-block: 1rem;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.hero__marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-dark);
+  animation: marquee 32s linear infinite;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 860px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+  }
+  .hero__media {
+    order: -1;
+    max-width: 460px;
+  }
+  .hero__img {
+    aspect-ratio: 16 / 12;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero {
+    padding-top: 108px;
+  }
+  .hero__stats {
+    flex-wrap: wrap;
+    gap: 1.4rem 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__marquee-track {
+    animation: none;
+  }
+  .hero__badge-dot {
+    animation: none;
+  }
+}

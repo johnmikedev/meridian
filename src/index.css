@@ -1,0 +1,295 @@
+/* =================================================================
+   Meridian Coffee Roasters — global styles & design tokens
+   Palette: deep espresso surfaces + ember accent + green-coffee sage
+   Type:   Fraunces (display) · Hanken Grotesk (body) · Space Mono (data)
+   ================================================================= */
+
+:root {
+  /* --- Color --- */
+  --espresso:    #211915; /* base dark brand surface */
+  --espresso-2:  #2c2118; /* raised dark surface */
+  --espresso-3:  #392b20; /* hover / borders on dark */
+  --oat:         #ece4d5; /* warm light section bg */
+  --oat-2:       #e3d9c6; /* alt light surface */
+  --cream:       #f5ede1; /* text on dark */
+  --ink:         #281f18; /* text on light */
+  --ember:       #dd6b3d; /* primary accent (roast ember) */
+  --ember-deep:  #b9522c;
+  --sage:        #8c9a6e; /* secondary accent (green coffee bean) */
+  --sage-deep:   #6f7d52;
+  --muted-dark:  #a8978a; /* muted text on dark */
+  --muted-light: #6f6256; /* muted text on light */
+  --line-dark:   rgba(245, 237, 225, 0.14);
+  --line-light:  rgba(40, 31, 24, 0.14);
+
+  /* --- Type --- */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, 'Courier New', monospace;
+
+  /* --- Layout --- */
+  --container: 1180px;
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --radius: 14px;
+  --radius-lg: 22px;
+
+  /* --- Motion --- */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-fast: 180ms;
+  --t-med: 320ms;
+}
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* keep anchored sections clear of the fixed header */
+  scroll-padding-top: 84px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--espresso);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 1.0625rem;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  font-optical-sizing: auto;
+}
+
+/* =================================================================
+   Shared primitives
+   ================================================================= */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+}
+
+/* light vs dark section themes */
+.section--light {
+  background: var(--oat);
+  color: var(--ink);
+}
+.section--dark {
+  background: var(--espresso);
+  color: var(--cream);
+}
+
+/* eyebrow / data label — monospace structural device */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ember);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 1px;
+  background: var(--ember);
+  opacity: 0.7;
+}
+
+.section-title {
+  font-size: clamp(2.05rem, 4.4vw, 3.4rem);
+  margin-top: 1.1rem;
+  max-width: 16ch;
+}
+
+.section-lead {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  margin-top: 1.25rem;
+  max-width: 52ch;
+  color: var(--muted-light);
+}
+.section--dark .section-lead {
+  color: var(--muted-dark);
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.95rem 1.65rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
+  transition: transform var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+  border: 1.5px solid transparent;
+  white-space: nowrap;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn--primary {
+  background: var(--ember);
+  color: #fff;
+}
+.btn--primary:hover {
+  background: var(--ember-deep);
+  transform: translateY(-2px);
+}
+.btn--ghost {
+  border-color: currentColor;
+  color: inherit;
+}
+.btn--ghost:hover {
+  background: currentColor;
+  transform: translateY(-2px);
+}
+.btn--ghost:hover .btn-label {
+  color: var(--espresso);
+}
+.section--light .btn--ghost:hover {
+  color: var(--oat);
+}
+
+/* arrow used inside buttons / links */
+.arrow {
+  transition: transform var(--t-fast) var(--ease);
+}
+.btn:hover .arrow,
+.link-arrow:hover .arrow {
+  transform: translateX(4px);
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.96rem;
+  color: var(--ember);
+  border-bottom: 1.5px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color var(--t-fast) var(--ease);
+}
+.link-arrow:hover {
+  border-color: var(--ember);
+}
+
+/* =================================================================
+   Scroll reveal (paired with useReveal hook)
+   ================================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* =================================================================
+   Accessibility
+   ================================================================= */
+:focus-visible {
+  outline: 2.5px solid var(--ember);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 200;
+  background: var(--ember);
+  color: #fff;
+  padding: 0.7rem 1.1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: top var(--t-fast) var(--ease);
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
