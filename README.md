@@ -4,7 +4,7 @@ A polished, fully responsive marketing site for a fictional small-batch coffee
 roastery. Built as a portfolio piece to demonstrate front-end development with
 **React + Vite** and **hand-written, custom CSS** (no Tailwind, no UI kit).
 
-> Live demo: _add your Vercel URL here after deploying_
+
 
 ## ✦ What's inside
 
